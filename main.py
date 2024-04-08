@@ -7,7 +7,6 @@ import csv
 
 
 def main():
-
     # check input format
     if (len(sys.argv) != 3):
         print("Incorrect command")
@@ -45,6 +44,7 @@ def main():
     return: void
 """    
 def checkPath(path: str):
+
     try:
         # check if path exists
         if (not os.path.exists(path)):
@@ -111,13 +111,15 @@ def compute(filePath: str, outputAvg: dict, outputMax: dict) -> None:
             
             # compute
             dset = np.array(f[device]["Position"])
-
-            numSensors = dset.shape[1]
-            numSamples = dset.shape[0]
-
             print(f"Device: {device}")
-            avgList = calculateAvgPosition(dset, numSensors, numSamples)
-            maxList = calculateMaxDistance(dset, numSensors)
+
+            # get the average
+            avgList = np.mean(dset, axis=0)
+
+            # get the maximum distance
+            maxList = np.max(np.linalg.norm(dset, axis=2), axis=0)
+
+            # create output rows
             outputAvg[filePath]["file"] = filePath 
             outputMax[filePath]["file"] = filePath
 
@@ -131,52 +133,7 @@ def compute(filePath: str, outputAvg: dict, outputMax: dict) -> None:
 
 
 
-
-"""
-    dset: the dataset to calculate avg position for
-    numSensors: the number of sensors for the device
-    numSamples: the number of samples in the device for each sensor
-    return: the list of avg positions for each sensor
-"""
-def calculateAvgPosition(dset: list, numSensors: int, numSamples: int) -> list:
-    avgList = np.zeros((numSensors, 3), dtype=float)
-    #   loop through every sensor and calculate average
-    for i in range(numSensors):
-        for sample in dset:
-            # x
-            avgList[i][0] += sample[i][0]
-            # y
-            avgList[i][1] += sample[i][1]
-            # z
-            avgList[i][2] += sample[i][2]
-        # compute
-        avgList[i] = [ avgList[i][0] / numSamples, avgList[i][1] / numSamples, avgList[i][2] / numSamples]
-    # return the list
-    return avgList
-
-
-
-
-
-"""
-    dset: the dataset to calculate avg position for
-    numSensors: the number of sensors for the device
-    return: the list of maximum distances for each sensor
-"""
-def calculateMaxDistance(dset: list, numSensors: int) -> list:
-    maxList = np.empty(numSensors, dtype=float)
-    # loop through every sensor and grab the maximum distance
-    for i in range(numSensors):
-        maxDistance = float('-inf')
-        for sample in dset:
-            distance = ((sample[i][0] ** 2) + (sample[i][1] ** 2) + (sample[i][2] ** 2)) ** 0.5
-            maxDistance = max(maxDistance, distance)
-        # store the maximum distance
-        maxList[i] = maxDistance
-    # return the list
-    return maxList
             
-
 """
     outputDir: the output csv files path
     outputDict: the dictionary of rows with each row being a dictionary
@@ -188,11 +145,9 @@ def outputToCSV(outputDir: str, outputDict: dict, fileName: str) -> None:
     headers = set()
     for row in outputDict:
         for col in outputDict[row]:
-            # ignore the file header for now
-            if (col != 'file'):
-                headers.add(col)
+            headers.add(col)
+
     headers = sorted(list(headers))
-    headers.append('file')
     # output to file
     with open(f"{outputDir}/{fileName}", "w") as f:
         csvWriter = csv.DictWriter(f, fieldnames=headers)
