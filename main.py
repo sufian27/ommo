@@ -3,7 +3,7 @@ import numpy as np
 import sys
 import os
 import csv
-
+from util.logs.tracking_logs_processor import TrackingLogsProcessor as TLP
 
 
 def main():
@@ -112,12 +112,12 @@ def compute(filePath: str, outputAvg: dict, outputMax: dict) -> None:
             # compute
             dset = np.array(f[device]["Position"])
             print(f"Device: {device}")
-
+            
+            logs_processor = TLP()
             # get the average
-            avgList = np.mean(dset, axis=0)
-
+            avgList = logs_processor.compute_avg(dset)
             # get the maximum distance
-            maxList = np.max(np.linalg.norm(dset, axis=2), axis=0)
+            maxList = logs_processor.compute_max(dset)
 
             # create output rows
             outputAvg[filePath]["file"] = filePath 
