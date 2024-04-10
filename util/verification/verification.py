@@ -1,11 +1,11 @@
 import h5py
 
-"""
-    File contains methods to help verify hdf5 structure
-"""
-
 
 def verify(device, obj, file):
+    """
+    Helper method to help verify hdf5 structure
+    """
+
     # check if the object in file is a group
     if not isinstance(obj, h5py.Group):
         raise Exception(f"{device} is not a group of datasets")

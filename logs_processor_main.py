@@ -1,8 +1,6 @@
 import h5py
 import numpy as np
 import sys
-import os
-import csv
 import util.processing.logs_processing as lp
 import util.verification.verification as ver
 import util.io.io as io
@@ -29,10 +27,14 @@ def main():
         print(e)
         sys.exit(-1)
 
+    output_avg = dict()
+    output_max = dict()
     # Perform computations on each file
     for file_path in files:
         print(f"COMPUTING FOR: {file_path}")
-        output_avg, output_max = compute(file_path)
+        file_avg, file_max = compute(file_path)
+        output_avg[file_path] = file_avg
+        output_max[file_path] = file_max
 
     # output the result
     io.output_to_csv(output_dir, output_avg, "file1.csv")
@@ -52,8 +54,6 @@ def compute(file_path: str):
     output_max = dict()
     # open file
     with h5py.File(file_path, "r") as file:
-        output_avg[file_path] = dict()
-        output_max[file_path] = dict()
         # check if the hdf5 is formatted correctly and calculate average position
         for device, obj in file.items():
             # verify the structure of the hdf5 file
@@ -69,21 +69,22 @@ def compute(file_path: str):
 
             dataset = np.array(file[device]["Position"])
             # get the average
-            avgList = lp.compute_avg(dataset)
+            avg_list = lp.compute_avg(dataset)
             # get the maximum distance
-            maxList = lp.compute_max(dataset)
+            max_list = lp.compute_max(dataset)
 
+            # TODO: Make this into a helper method
             # create output rows
-            output_avg[file_path]["file"] = file_path
-            output_max[file_path]["file"] = file_path
+            output_avg["file"] = file_path
+            output_max["file"] = file_path
 
-            for i, lis in enumerate(avgList):
-                output_avg[file_path][f"{device}_S{i}_x"] = lis[0]
-                output_avg[file_path][f"{device}_S{i}_y"] = lis[1]
-                output_avg[file_path][f"{device}_S{i}_z"] = lis[2]
+            for i, lis in enumerate(avg_list):
+                output_avg[f"{device}_S{i}_x"] = lis[0]
+                output_avg[f"{device}_S{i}_y"] = lis[1]
+                output_avg[f"{device}_S{i}_z"] = lis[2]
 
-            for i, val in enumerate(maxList):
-                output_max[file_path][f"{device}_S{i}_max"] = val
+            for i, val in enumerate(max_list):
+                output_max[f"{device}_S{i}_max"] = val
 
     return output_avg, output_max
 

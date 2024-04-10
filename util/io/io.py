@@ -17,6 +17,12 @@ def get_hdf5_files(input_path: str) -> list:
     return hdf5List
 
 
+"""
+    path: the directory path to verify
+    return: void
+"""
+
+
 def check_path(path: str):
 
     # check if path exists
