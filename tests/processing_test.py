@@ -1,5 +1,6 @@
 import util.processing.logs_processing as lp
 import numpy as np
+import math
 
 
 def test_compute_avg__normal_input():
@@ -21,14 +22,14 @@ def test_compute_avg__normal_input():
 def test_compute_max__normal_input():
     input = np.array(
         [
-            [[1, 1, 1], [2, 2, 2]],  # Sample 1
-            [[3, 3, 2], [4, 4, 1]],  # Sample 2
+            [[3, 3, 0], [4, 0, 4]],  # Sample 1
+            [[5, 5, 0], [3, 3, 0]],  # Sample 2
         ]
     )
     expected_output = np.array(
         [
-            3,  # Sensor 1
-            3,  # Sensor 2
+            math.sqrt(5**2 + 5**2),  # Sensor 1
+            math.sqrt(4**2 + 4**2),  # Sensor 2
         ]
     )
     assert (lp.compute_max(input) == expected_output).all() == True
