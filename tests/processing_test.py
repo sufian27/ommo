@@ -1,6 +1,6 @@
 import util.processing.logs_processing as lp
 import numpy as np
-import math
+from math import sqrt
 
 
 def test_compute_avg__normal_input():
@@ -28,8 +28,8 @@ def test_compute_max__normal_input():
     )
     expected_output = np.array(
         [
-            math.sqrt(5**2 + 5**2),  # Sensor 1
-            math.sqrt(4**2 + 4**2),  # Sensor 2
+            sqrt(5**2 + 5**2),  # Sensor 1
+            sqrt(4**2 + 4**2),  # Sensor 2
         ]
     )
     assert (lp.compute_max(input) == expected_output).all() == True
