@@ -10,7 +10,7 @@ def main():
     # check input format
     if len(sys.argv) != 3:
         print("Incorrect command")
-        print("Use: python3 main.py <INPUT DIR PATH> <OUTPUT DIR PATH>")
+        print("Use: python3 logs_processing_main.py <INPUT DIR PATH> <OUTPUT DIR PATH>")
         sys.exit(-1)
 
     # get the input and output directory
