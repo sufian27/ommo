@@ -8,13 +8,11 @@ import csv
 
 
 def get_hdf5_files(input_path: str) -> list:
-    allFiles = os.listdir(input_path)
-
-    dir_list = [f"{input_path}/{f}" for f in allFiles]
+    all_files = os.listdir(input_path)
+    dir_list = [os.path.join(input_path, f) for f in all_files]
     # only grab the hdf5 files
-    hdf5List = list(filter(lambda file: file[-5:] == ".hdf5", dir_list))
-
-    return hdf5List
+    hdf5_list = list(filter(lambda file: file[-5:] == ".hdf5", dir_list))
+    return hdf5_list
 
 
 """
@@ -24,7 +22,6 @@ def get_hdf5_files(input_path: str) -> list:
 
 
 def check_path(path: str):
-
     # check if path exists
     if not os.path.exists(path):
         raise Exception(f"{path} does not exist")
