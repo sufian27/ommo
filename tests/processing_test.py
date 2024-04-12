@@ -4,6 +4,11 @@ from math import sqrt
 
 
 def test_compute_avg__normal_input():
+    """
+    tests the compute_avg function in logs_processing with
+    normal input
+    """
+
     input = np.array(
         [
             [[2, 2, 2], [3, 3, 3]],  # Sample 1
@@ -20,6 +25,11 @@ def test_compute_avg__normal_input():
 
 
 def test_compute_max__normal_input():
+    """
+    tests the compute_max function in logs_processing with
+    normal input
+    """
+
     input = np.array(
         [
             [[3, 3, 0], [4, 0, 4]],  # Sample 1

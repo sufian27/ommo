@@ -3,7 +3,27 @@ import h5py
 
 def verify(device, obj, file):
     """
-    Helper method to help verify hdf5 structure
+    
+    Helper method to verify hdf5 structure
+    
+    Parameters
+    ----------
+    device : str
+        the device name
+    obj : h5py.Group
+        the instance of hdf5 group to verify
+    file : h5py.File
+        the hdf5 file instance to verify
+
+    Raises
+    ------
+    Exception
+        if the obj parameter is not an instance of hdf5 group
+    Exception
+        if the Position key is not the group obj
+    Exception
+        if the Position key in the group is not an instance of hdf5
+        dataset
     """
 
     # check if the object in file is a group

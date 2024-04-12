@@ -7,6 +7,18 @@ import util.io.io as io
 
 
 def main():
+    """
+    
+    Gets all the hdf5 files in the input directory, and stores the average
+    position and maximum euclidian distance of each sensor as rows
+    in output dictionaries. Outputs the data into two separate CSV files.
+
+    * File 1: contains the average x, y, and z coordinates for each sensor's samples.
+    * File 2: contains the maximum euclidian distance for each sensor's samples.
+      
+    Usage: python3 logs_processing_main.py <INPUT DIR PATH> <OUTPUT DIR PATH>
+    """
+
     # check input format
     if len(sys.argv) != 3:
         print("Incorrect command")
@@ -41,15 +53,25 @@ def main():
     io.output_to_csv(output_dir, max_rows, "file2.csv")
 
 
-"""
-    file_path: the path to the hdf5 file
-    avg_rows: the output dictionary for avg positions
-    max_rows: the output dictionary for max position 
-    return: a list with average positions for each sensor for a device
-"""
-
-
 def compute(file_path: str):
+    """
+    
+    Loops through the device groups in hdf5 file and computes the average
+    position and maximum euclidian distance for all sensors in the device
+
+    Parameters
+    ----------
+    file_path : str
+        the path to the hdf5 file
+
+    Returns
+    -------
+    avg_rows : dict
+        the dictionary with average position for every sensor in the hdf5 file
+    max_rows : dict
+        the dictionary with maximum euclidian distance for every sensor in the hdf5 file
+    """
+
     with h5py.File(file_path, "r") as file:
         for device, obj in file.items():
             # verify the structure of the hdf5 file
@@ -74,9 +96,6 @@ def compute(file_path: str):
             avg_rows["file"] = file_path
             max_rows = lp.get_max_rows(max_list, device)
             max_rows["file"] = file_path
-
-            for i, val in enumerate(max_list):
-                max_rows[f"{device}_S{i}_max"] = val
 
     return avg_rows, max_rows
 
