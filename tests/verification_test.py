@@ -13,6 +13,11 @@ def not_raises(exception):
   
 
 def test_verify_structure__normal_input():  
+    """
+    tests the verify function in verification with
+    normal input - No exception should be raised
+    """
+
     tf = tempfile.TemporaryFile()
     with h5py.File(tf, 'w') as file:
         grp = file.create_group("device_1") # device group
@@ -22,6 +27,11 @@ def test_verify_structure__normal_input():
 
 
 def test_verify_not_group_instance():
+    """
+    tests whether the verify function in verification raises
+    the correct exception
+    """
+
     tf = tempfile.TemporaryFile()
     with h5py.File(tf, 'w') as file:
         incorrect_grp = file.create_dataset("device_1", (1000, 2, 3)) # not a group instance 
@@ -31,6 +41,11 @@ def test_verify_not_group_instance():
 
 
 def test_verify_no_position_key():
+    """
+    tests whether the verify function in verification raises
+    the correct exception
+    """
+    
     tf = tempfile.TemporaryFile()
     with h5py.File(tf, 'w') as file:
         grp = file.create_group("device_1") # device group
@@ -41,6 +56,11 @@ def test_verify_no_position_key():
 
 
 def test_verify_not_dataset_instance():
+    """
+    tests whether the verify function in verification raises
+    the correct exception
+    """
+
     tf = tempfile.TemporaryFile()
     with h5py.File(tf, 'w') as file:
         grp = file.create_group("device_1") # device group

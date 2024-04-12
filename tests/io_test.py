@@ -12,6 +12,16 @@ def not_raises(exception):
   
 
 def test_get_hdf5_files(tmp_path):
+    """
+
+    tests the get_hdf5_files function in io
+
+    Parameters
+    ----------
+    tmp_path : pathlib.Path
+        the temporary path to create directory at
+    """
+
     # temporary directory with files
     dir = tmp_path / "tmp_directory"
     dir.mkdir()
@@ -34,6 +44,16 @@ def test_get_hdf5_files(tmp_path):
 
 
 def test_path_not_exists(tmp_path):
+    """
+
+    tests the check_path function in io
+
+    Parameters
+    ----------
+    tmp_path : pathlib.Path
+        the temporary path to create directory at
+    """
+
     # temporary directory
     dir = tmp_path / "tmp_directory"
     dir.mkdir()
@@ -45,6 +65,16 @@ def test_path_not_exists(tmp_path):
 
 
 def test_path_not_directory(tmp_path):
+    """
+
+    tests the check_path function in io
+
+    Parameters
+    ----------
+    tmp_path : pathlib.Path
+        the temporary path to create directory at
+    """
+
     # temporary file
     incorrect_dir = tmp_path / "tmp_directory"
     incorrect_dir.touch()
@@ -80,6 +110,24 @@ def test_path_not_directory(tmp_path):
     )
 ])
 def test_output__normal_input(tmp_path, test_input, expected, expected_headers):
+    """
+
+    tests the output_to_csv function in io
+
+    Parameters
+    ----------
+    tmp_path : pathlib.Path
+        the temporary path to create directory at
+    test_input : dict
+        the dictionary to output the csv for
+    expected : dict
+        the dictionary that is expected after reading
+        the output csv file
+    expected_headers : list
+        the list of unique header names that are expected
+        after reading the output csv file
+    """
+
     # temporary output directory
     output_dir = tmp_path / "tmp_output_dir"
     output_dir.mkdir()
@@ -96,7 +144,7 @@ def test_output__normal_input(tmp_path, test_input, expected, expected_headers):
         assert (set(expected_headers) == set(csvReader.fieldnames))
         for row in csvReader:
             # every row must be the same
-            assert expected[row["file"]] == row
+            assert (expected[row["file"]] == row)
 
 
             
