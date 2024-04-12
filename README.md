@@ -11,6 +11,19 @@ Given an input directory of hdf5 files, outputs two CSV files:
 
 ## Getting started
 
+### Dependencies
+
+Libraries used:
+
+- [h5py](https://pypi.org/project/h5py/)
+- os
+- csv
+- numpy
+
+### Installation
+
+- Python version 3.12.2 (latest) used
+
 
 
 
