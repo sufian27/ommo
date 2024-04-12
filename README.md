@@ -59,7 +59,7 @@ python3 -m pytest tests/<testfile.py>
 
 ## Authors
 
-@Hassanmushtaq524
+Hassan Mushtaq: [Hassanmushtaq524](https://github.com/hassanmushtaq524)
 
 
 
