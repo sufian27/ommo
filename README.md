@@ -30,7 +30,10 @@ pip install h5py
 ```bash
 pip install numpy
 ```
-
+- pytest
+```bash
+pip3 install pytest
+```
 
 ### Installation
 
@@ -44,12 +47,19 @@ git clone https://github.com/Hassanmushtaq524/ommo.git
 ### Usage
 
 
-Use python3 to run the code, providing input and output directory paths that should already exist.
+- Use python3 to run the code, providing input and output directory paths that should already exist.
 ```bash
 python3 logs_processor_main.py <input_path> <output_path>
 ```
 
+- Use pytest to run the unit tests:
+```bash
+python3 -m pytest tests/<testfile.py>
+```
 
+## Authors
+
+@Hassanmushtaq524
 
 
 
