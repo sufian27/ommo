@@ -75,9 +75,6 @@ def compute(file_path: str):
             max_rows = lp.get_max_rows(max_list, device)
             max_rows["file"] = file_path
 
-            for i, val in enumerate(max_list):
-                max_rows[f"{device}_S{i}_max"] = val
-
     return avg_rows, max_rows
 
 

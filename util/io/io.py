@@ -47,7 +47,7 @@ def output_to_csv(output_dir: str, output_dict: dict, filename: str) -> None:
 
     headers = sorted(list(headers))
     # output to file
-    with open(f"{output_dir}/{filename}", "w") as f:
+    with open(os.path.join(output_dir, filename), "w") as f:
         csvWriter = csv.DictWriter(f, fieldnames=headers)
         # write the headers
         csvWriter.writeheader()
