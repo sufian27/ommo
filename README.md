@@ -16,6 +16,10 @@ Given an input directory of hdf5 files, outputs two CSV files:
 Libraries used:
 
 - [h5py](https://pypi.org/project/h5py/)
+```bash
+pip install h5py
+```
+
 - os
 - csv
 - numpy
