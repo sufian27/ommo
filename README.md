@@ -34,6 +34,15 @@ pip install numpy
 ```bash
 git clone https://github.com/Hassanmushtaq524/ommo.git
 ```
+2. Install the dependencies
+
+### Usage
+
+Use python3 to run the code, providing input and output directory paths that should already exist.
+
+```bash
+python3 logs_processor_main.py <input_path> <output_path>
+```
 
 
 
