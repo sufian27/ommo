@@ -15,24 +15,27 @@ Given an input directory of hdf5 files, outputs two CSV files:
 
 Libraries used:
 
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install dependencies.
+
 - [h5py](https://pypi.org/project/h5py/)
 ```bash
 pip install h5py
 ```
-
 - os
 - csv
 - numpy
+```bash
+pip install numpy
+```
 
 ### Installation
 
-- Python version 3.12.2 (latest) used
-
-
-
-
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
-
+1. Clone the repository
 ```bash
-pip install foobar
+git clone https://github.com/Hassanmushtaq524/ommo.git
 ```
+
+
+
+
+
