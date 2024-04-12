@@ -11,11 +11,14 @@ Given an input directory of hdf5 files, outputs two CSV files:
 
 ## Getting started
 
+
 ### Dependencies
+
 
 Libraries used:
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install dependencies.
+
 
 - [h5py](https://pypi.org/project/h5py/)
 ```bash
@@ -28,18 +31,20 @@ pip install h5py
 pip install numpy
 ```
 
+
 ### Installation
 
-1. Clone the repository
+
+Clone the repository
 ```bash
 git clone https://github.com/Hassanmushtaq524/ommo.git
 ```
-2. Install the dependencies
+
 
 ### Usage
 
-Use python3 to run the code, providing input and output directory paths that should already exist.
 
+Use python3 to run the code, providing input and output directory paths that should already exist.
 ```bash
 python3 logs_processor_main.py <input_path> <output_path>
 ```
